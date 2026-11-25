@@ -148,6 +148,15 @@ p {
     color: var(--mute);
 }
 
+.rows .desc::before {
+    content: "> ";
+}
+
+.stars {
+    color: var(--mute);
+    white-space: nowrap;
+}
+
 .tag {
     font-weight: 700;
 }

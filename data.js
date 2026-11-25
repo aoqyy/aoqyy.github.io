@@ -25,8 +25,8 @@ window.SITE = {
       "desc": "> Share files directly between different devices (including mobile)."
     },
     {
-      "type": "other",
-      "url": "https://ryoku.dev",
+      "type": "repo",
+      "url": "https://github.com/Ryoku-dev/ryoku",
       "desc": "Trending CachyOS Linux distro, pre-made to be beautiful",
       "title": "Ryoku"
     }

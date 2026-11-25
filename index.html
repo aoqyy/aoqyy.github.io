@@ -86,7 +86,49 @@
                 document.getElementById(id).textContent = text || '';
             }
 
-            // Title link, optional {tag}, optional description underneath.
+            // Star count for github.com/owner/repo links. Cached for an hour, because
+            // GitHub allows only 60 requests per hour per visitor without a token.
+            var starRequests = {};
+
+            function shortNumber(n) {
+                if (n < 1000) return String(n);
+                return (n / 1000).toFixed(n < 10000 ? 1 : 0).replace(/\.0$/, '') + 'k';
+            }
+
+            function stars(url, span) {
+                var m = /^https?:\/\/(?:www\.)?github\.com\/([\w-]+)\/([\w.-]+?)(?:\.git)?\/?(?:[?#].*)?$/i
+                    .exec(String(url || '').trim());
+                if (!m) return;
+                var repo = (m[1] + '/' + m[2]).toLowerCase();
+                var key = 'stars:' + repo;
+
+                function put(n) {
+                    if (typeof n !== 'number') return;
+                    span.textContent = '★ ' + shortNumber(n);
+                    span.hidden = false;
+                }
+
+                try {
+                    var cached = JSON.parse(localStorage.getItem(key));
+                    if (cached && Date.now() - cached.t < 3600000) return put(cached.n);
+                } catch (e) {}
+
+                if (!starRequests[repo]) {
+                    starRequests[repo] = fetch('https://api.github.com/repos/' + repo)
+                        .then(function (r) {
+                            if (!r.ok) throw new Error(r.status);
+                            return r.json();
+                        })
+                        .then(function (j) {
+                            var n = j.stargazers_count;
+                            try { localStorage.setItem(key, JSON.stringify({ n: n, t: Date.now() })); } catch (e) {}
+                            return n;
+                        });
+                }
+                starRequests[repo].then(put, function () {});
+            }
+
+            // Title link, optional {tag}, GitHub stars, optional description underneath.
             function items(id, list, tagOf) {
                 var ul = document.getElementById(id);
                 ul.textContent = '';
@@ -99,7 +141,14 @@
                         li.appendChild(document.createTextNode(' '));
                         li.appendChild(el('span', 'tag', '{' + tag + '}'));
                     }
-                    if (it.desc) li.appendChild(el('span', 'desc', it.desc));
+                    var star = el('span', 'stars');
+                    star.hidden = true;
+                    li.appendChild(document.createTextNode(' '));
+                    li.appendChild(star);
+                    stars(it.url, star);
+                    // The "> " in front of descriptions comes from CSS, so drop one typed by hand.
+                    var desc = String(it.desc || '').replace(/^\s*>\s*/, '');
+                    if (desc) li.appendChild(el('span', 'desc', desc));
                     ul.appendChild(li);
                 });
                 ul.hidden = list.length === 0;
