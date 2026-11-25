@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="aoki: electronics, Python and personal projects.">
+    <title>aoki</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <p class="path" id="path">C:\aoki\home</p>
+            <nav aria-label="Main">
+                <ul>
+                    <li><a href="#home">home</a></li>
+                    <li><a href="#projects">projects</a></li>
+                    <li><a href="#recommended">recommended</a></li>
+                    <li><a href="#about">about</a></li>
+                    <li><a href="#contact">contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section id="home">
+                <h1 class="hero" aria-label="made by aoki."><span aria-hidden="true"><span id="t1">made by</span><span class="cursor" id="cursor" hidden></span><br><span class="plaque" id="plaque"><span id="t2">aoki</span><span class="dot">.</span></span></span></h1>
+                <p class="lead" id="home-lead"></p>
+                <p class="mute" id="home-note"></p>
+            </section>
+
+            <section id="projects">
+                <h2>projects</h2>
+                <ul class="rows" id="projects-list"></ul>
+                <p id="projects-list-empty">Projects will appear here later.</p>
+                <p class="mute">My code is on <a href="https://github.com/aoqyy">GitHub</a>.</p>
+            </section>
+
+            <section id="recommended">
+                <h2>recommended</h2>
+                <p class="mute">Apps, guides and repositories I find useful.</p>
+                <ul class="rows" id="recommended-list"></ul>
+                <p id="recommended-list-empty">Nothing here yet.</p>
+            </section>
+
+            <section id="about">
+                <h2>about</h2>
+                <div id="about-text"></div>
+                <ul class="rows" id="about-rows"></ul>
+            </section>
+
+            <section id="contact">
+                <h2>contact</h2>
+                <ul class="rows contact" id="contact-list"></ul>
+            </section>
+        </main>
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+        (function () {
+            var tabs = ['home', 'projects', 'recommended', 'about', 'contact'];
+            var path = document.getElementById('path');
+            var data = window.SITE || {};
+
+            function el(tag, cls, text) {
+                var e = document.createElement(tag);
+                if (cls) e.className = cls;
+                if (text != null) e.textContent = text;
+                return e;
+            }
+
+            // Only http(s) and mailto links, so a typo in the admin can't inject a script link.
+            function link(text, url) {
+                url = String(url || '').trim();
+                if (!/^(https?:|mailto:)/i.test(url)) return el('span', null, text);
+                var a = el('a', null, text);
+                a.href = url;
+                return a;
+            }
+
+            function setText(id, text) {
+                document.getElementById(id).textContent = text || '';
+            }
+
+            // Title link, optional {tag}, optional description underneath.
+            function items(id, list, tagOf) {
+                var ul = document.getElementById(id);
+                ul.textContent = '';
+                list = list || [];
+                list.forEach(function (it) {
+                    var li = el('li');
+                    li.appendChild(link(it.title, it.url));
+                    var tag = tagOf && tagOf(it);
+                    if (tag) {
+                        li.appendChild(document.createTextNode(' '));
+                        li.appendChild(el('span', 'tag', '{' + tag + '}'));
+                    }
+                    if (it.desc) li.appendChild(el('span', 'desc', it.desc));
+                    ul.appendChild(li);
+                });
+                ul.hidden = list.length === 0;
+                document.getElementById(id + '-empty').hidden = list.length > 0;
+            }
+
+            function render() {
+                var home = data.home || {};
+                setText('home-lead', home.lead);
+                setText('home-note', home.note);
+
+                items('projects-list', data.projects);
+                items('recommended-list', data.recommended, function (it) { return it.type; });
+
+                var about = data.about || {};
+                var box = document.getElementById('about-text');
+                box.textContent = '';
+                String(about.text || '').split(/\n\s*\n/).forEach(function (para) {
+                    if (para.trim()) box.appendChild(el('p', null, para.trim()));
+                });
+                var rows = document.getElementById('about-rows');
+                rows.textContent = '';
+                (about.rows || []).forEach(function (r) {
+                    var li = el('li');
+                    li.appendChild(el('span', 'tag', r.tag));
+                    li.appendChild(document.createTextNode(' ' + (r.text || '')));
+                    rows.appendChild(li);
+                });
+
+                var contact = document.getElementById('contact-list');
+                contact.textContent = '';
+                (data.contact || []).forEach(function (c) {
+                    var li = el('li');
+                    li.appendChild(link(c.label, c.url));
+                    if (c.tag) {
+                        li.appendChild(document.createTextNode(' '));
+                        li.appendChild(el('span', 'tag', '{' + c.tag + '}'));
+                    }
+                    contact.appendChild(li);
+                });
+            }
+
+            function show() {
+                var name = location.hash.slice(1);
+                if (tabs.indexOf(name) < 0) name = 'home';
+                tabs.forEach(function (t) {
+                    document.getElementById(t).hidden = (t !== name);
+                    var link = document.querySelector('nav a[href="#' + t + '"]');
+                    if (t === name) link.setAttribute('aria-current', 'page');
+                    else link.removeAttribute('aria-current');
+                });
+                path.textContent = 'C:\\aoki\\' + name;
+                document.title = name === 'home' ? 'aoki' : name + ' | aoki';
+                window.scrollTo(0, 0);
+            }
+
+            function type(el, text, speed, done) {
+                var i = 0;
+                (function step() {
+                    i += 1;
+                    el.textContent = text.slice(0, i);
+                    if (i < text.length) setTimeout(step, speed);
+                    else if (done) setTimeout(done, 250);
+                })();
+            }
+
+            // Typing intro: plays once per visit, only when the site opens on home.
+            function intro() {
+                var reduce = window.matchMedia &&
+                    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                var played = false;
+                try { played = sessionStorage.getItem('intro') === '1'; } catch (e) {}
+                var start = location.hash.slice(1);
+                if (reduce || played || preview || (start && start !== 'home')) return;
+                try { sessionStorage.setItem('intro', '1'); } catch (e) {}
+
+                var t1 = document.getElementById('t1');
+                var t2 = document.getElementById('t2');
+                var plaque = document.getElementById('plaque');
+                var cursor = document.getElementById('cursor');
+                var line1 = t1.textContent;
+                var line2 = t2.textContent;
+
+                t1.textContent = '';
+                t2.textContent = '';
+                plaque.hidden = true;
+                cursor.hidden = false;
+
+                type(t1, line1, 80, function () {
+                    cursor.hidden = true;
+                    plaque.hidden = false;
+                    type(t2, line2, 110);
+                });
+            }
+
+            // Live preview inside admin.html: the admin sends unsaved content and the
+            // current tab. Only on a local copy, so the published site ignores it.
+            var local = location.protocol === 'file:' ||
+                location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+            var preview = local && window.parent !== window && /[?&]preview\b/.test(location.search);
+            if (preview) {
+                window.addEventListener('message', function (e) {
+                    if (e.source !== window.parent || !e.data || e.data.from !== 'aoki-admin') return;
+                    if (e.data.site) {
+                        data = e.data.site;
+                        render();
+                    }
+                    if (e.data.tab && tabs.indexOf(e.data.tab) >= 0) location.hash = e.data.tab;
+                });
+                window.parent.postMessage({ from: 'aoki-site', ready: true }, '*');
+            }
+
+            render();
+            window.addEventListener('hashchange', show);
+            show();
+            intro();
+        })();
+    </script>
+</body>
+</html>
