@@ -4,7 +4,13 @@ window.SITE = {
     "lead": "I study electronics, write Python and build small tools for my own projects.",
     "note": "Open projects to see what I’m working on."
   },
-  "projects": [],
+  "projects": [
+    {
+      "title": "motd",
+      "url": "https://github.com/aoqyy/motd",
+      "desc": "A minimal terminal-style start page for your browser"
+    }
+  ],
   "recommended": [
     {
       "type": "app",
