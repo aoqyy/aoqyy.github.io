@@ -4,7 +4,7 @@ window.SITE = {
     "lead": "I study electronics, write Python and build small tools for my own projects.",
     "note": "Open projects to see what I’m working on."
   },
-  "projects": [
+    "projects": [
     {
       "title": "motd",
       "status": "live",
@@ -13,11 +13,11 @@ window.SITE = {
       "stack": "vanilla js · localStorage · 0 dependencies"
     },
     {
-      "title": "paper-agency",
+      "title": "paper-agents",
       "status": "wip",
       "url": "",
-      "desc": "Free LLM router: one OpenAI-compatible endpoint over free API tiers, with fallback on rate limits",
-      "stack": ""
+      "desc": "A noir-styled interface for managing LLM agents: orders, reports and stamps in a 1930s agency",
+      "stack": "react · vite · typescript"
     }
   ],
   "recommended": [
