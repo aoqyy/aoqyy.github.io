@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>404 | aoki</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css?v=3">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <p class="path" id="path">C:\aoki\404</p>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="/#home">home</a></li>
+          <li><a href="/#projects">projects</a></li>
+          <li><a href="/#recommended">recommended</a></li>
+          <li><a href="/#about">about</a></li>
+          <li><a href="/#contact">contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h1 class="hero" aria-label="path not found.">path not<br><span class="plaque">found<span class="dot">.</span></span></h1>
+      <p class="lead">There is nothing at this address.</p>
+      <p class="mute">&gt; <a href="/">cd home</a></p>
+    </main>
+  </div>
+
+  <script>
+  (function () {
+    var tabs = ['home', 'projects', 'recommended', 'about', 'contact'];
+
+    // Requested path in the header, like C:\aoki\some\page
+    var p = location.pathname;
+    try { p = decodeURIComponent(p); } catch (e) {}
+    p = p.replace(/^\/+|\/+$/g, '').replace(/\//g, '\\');
+    if (p) document.getElementById('path').textContent = 'C:\\aoki\\' + p;
+
+    // Keys 1-5 open the tabs of the main page.
+    document.addEventListener('keydown', function (e) {
+      if (e.ctrlKey || e.metaKey || e.altKey || e.repeat) return;
+      var n = parseInt(e.key, 10);
+      if (n >= 1 && n <= tabs.length) location.href = '/#' + tabs[n - 1];
+    });
+  })();
+  </script>
+</body>
+</html>

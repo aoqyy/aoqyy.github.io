@@ -7,8 +7,17 @@ window.SITE = {
   "projects": [
     {
       "title": "motd",
+      "status": "live",
       "url": "https://github.com/aoqyy/motd",
-      "desc": "A minimal terminal-style start page for your browser"
+      "desc": "A minimal terminal-style start page for your browser",
+      "stack": "vanilla js · localStorage · 0 dependencies"
+    },
+    {
+      "title": "paper-agency",
+      "status": "wip",
+      "url": "",
+      "desc": "Free LLM router: one OpenAI-compatible endpoint over free API tiers, with fallback on rate limits",
+      "stack": ""
     }
   ],
   "recommended": [

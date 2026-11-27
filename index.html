@@ -1,364 +1,333 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="aoki: electronics, Python and personal projects."
-    />
-    <title>aoki</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css?v=2" />
-  </head>
-  <body>
-    <div class="wrap">
-      <header>
-        <p class="path" id="path">C:\aoki\home</p>
-        <nav aria-label="Main">
-          <ul>
-            <li><a href="#home">home</a></li>
-            <li><a href="#projects">projects</a></li>
-            <li><a href="#recommended">recommended</a></li>
-            <li><a href="#about">about</a></li>
-            <li><a href="#contact">contact</a></li>
-          </ul>
-        </nav>
-      </header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="aoki: electronics, Python and personal projects.">
+  <title>aoki</title>
 
-      <main>
-        <section id="home">
-          <h1 class="hero" aria-label="made by aoki.">
-            <span aria-hidden="true"
-              ><span id="t1">made by</span
-              ><span class="cursor" id="cursor" hidden></span><br /><span
-                class="plaque"
-                id="plaque"
-                ><span id="t2">aoki</span><span class="dot">.</span></span
-              ></span
-            >
-          </h1>
-          <p class="lead" id="home-lead"></p>
-          <p class="mute" id="home-note"></p>
-        </section>
+  <!-- link previews in Telegram, Discord, X, etc. -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aoqyy.github.io/">
+  <meta property="og:title" content="aoki">
+  <meta property="og:description" content="Projects, things I recommend, and a bit about me.">
+  <meta property="og:image" content="https://aoqyy.github.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
 
-        <section id="projects">
-          <h2>projects</h2>
-          <ul class="rows" id="projects-list"></ul>
-          <p id="projects-list-empty">Projects will appear here later.</p>
-          <p class="mute">
-            My code is on <a href="https://github.com/aoqyy">GitHub</a>.
-          </p>
-        </section>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <p class="path" id="path">C:\aoki\home</p>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="#home" title="home (1)" aria-keyshortcuts="1">home</a></li>
+          <li><a href="#projects" title="projects (2)" aria-keyshortcuts="2">projects</a></li>
+          <li><a href="#recommended" title="recommended (3)" aria-keyshortcuts="3">recommended</a></li>
+          <li><a href="#about" title="about (4)" aria-keyshortcuts="4">about</a></li>
+          <li><a href="#contact" title="contact (5)" aria-keyshortcuts="5">contact</a></li>
+        </ul>
+      </nav>
+    </header>
 
-        <section id="recommended">
-          <h2>recommended</h2>
-          <p class="mute">Apps, guides and repositories I find useful.</p>
-          <p class="filter" id="recommended-filter" hidden></p>
-          <ul class="rows" id="recommended-list"></ul>
-          <p id="recommended-list-empty">Nothing here yet.</p>
-        </section>
+    <main>
+      <section id="home">
+        <h1 class="hero" aria-label="made by aoki."><span aria-hidden="true"><span id="t1">made by</span><span class="cursor" id="cursor" hidden></span><br><span class="plaque" id="plaque"><span id="t2">aoki</span><span class="dot">.</span></span></span></h1>
+        <p class="lead" id="home-lead"></p>
+        <p class="mute" id="home-note"></p>
+      </section>
 
-        <section id="about">
-          <h2>about</h2>
-          <div id="about-text"></div>
-          <ul class="rows" id="about-rows"></ul>
-        </section>
+      <section id="projects">
+        <h2>projects</h2>
+        <ul class="rows" id="projects-list"></ul>
+        <p id="projects-list-empty">Projects will appear here later.</p>
+        <p class="mute">My code is on <a href="https://github.com/aoqyy">GitHub</a>.</p>
+      </section>
 
-        <section id="contact">
-          <h2>contact</h2>
-          <ul class="rows contact" id="contact-list"></ul>
-        </section>
-      </main>
-    </div>
+      <section id="recommended">
+        <h2>recommended</h2>
+        <p class="mute">Apps, guides and repositories I find useful.</p>
+        <p class="filter" id="recommended-filter" hidden></p>
+        <ul class="rows" id="recommended-list"></ul>
+        <p id="recommended-list-empty">Nothing here yet.</p>
+      </section>
 
-    <script src="data.js?v=2"></script>
-    <script>
-      (function () {
-        var tabs = ["home", "projects", "recommended", "about", "contact"];
-        var path = document.getElementById("path");
-        var data = window.SITE || {};
+      <section id="about">
+        <h2>about</h2>
+        <div id="about-text"></div>
+        <ul class="rows" id="about-rows"></ul>
+      </section>
 
-        function el(tag, cls, text) {
-          var e = document.createElement(tag);
-          if (cls) e.className = cls;
-          if (text != null) e.textContent = text;
-          return e;
-        }
+      <section id="contact">
+        <h2>contact</h2>
+        <ul class="rows contact" id="contact-list"></ul>
+      </section>
+    </main>
+  </div>
 
-        // Only http(s) and mailto links, so a typo in the admin can't inject a script link.
-        function link(text, url) {
-          url = String(url || "").trim();
-          if (!/^(https?:|mailto:)/i.test(url)) return el("span", null, text);
-          var a = el("a", null, text);
-          a.href = url;
-          return a;
-        }
+  <script src="data.js?v=3"></script>
+  <script>
+  (function () {
+    var tabs = ['home', 'projects', 'recommended', 'about', 'contact'];
+    var path = document.getElementById('path');
+    var data = window.SITE || {};
 
-        function setText(id, text) {
-          document.getElementById(id).textContent = text || "";
-        }
+    function el(tag, cls, text) {
+      var e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text != null) e.textContent = text;
+      return e;
+    }
 
-        // Star count for github.com/owner/repo links. Cached for an hour, because
-        // GitHub allows only 60 requests per hour per visitor without a token.
-        var starRequests = {};
+    // Only http(s) and mailto links, so a typo in the admin can't inject a script link.
+    function link(text, url) {
+      url = String(url || '').trim();
+      if (!/^(https?:|mailto:)/i.test(url)) return el('span', null, text);
+      var a = el('a', null, text);
+      a.href = url;
+      return a;
+    }
 
-        function shortNumber(n) {
-          if (n < 1000) return String(n);
-          return (
-            (n / 1000).toFixed(n < 10000 ? 1 : 0).replace(/\.0$/, "") + "k"
-          );
-        }
+    function setText(id, text) {
+      document.getElementById(id).textContent = text || '';
+    }
 
-        function stars(url, span) {
-          var m =
-            /^https?:\/\/(?:www\.)?github\.com\/([\w-]+)\/([\w.-]+?)(?:\.git)?\/?(?:[?#].*)?$/i.exec(
-              String(url || "").trim(),
-            );
-          if (!m) return;
-          var repo = (m[1] + "/" + m[2]).toLowerCase();
-          var key = "stars:" + repo;
+    // Star count for github.com/owner/repo links. Cached for an hour, because
+    // GitHub allows only 60 requests per hour per visitor without a token.
+    var starRequests = {};
 
-          function put(n) {
-            if (typeof n !== "number") return;
-            span.textContent = "★ " + shortNumber(n);
-            span.hidden = false;
-          }
+    function shortNumber(n) {
+      if (n < 1000) return String(n);
+      return (n / 1000).toFixed(n < 10000 ? 1 : 0).replace(/\.0$/, '') + 'k';
+    }
 
-          try {
-            var cached = JSON.parse(localStorage.getItem(key));
-            if (cached && Date.now() - cached.t < 3600000) return put(cached.n);
-          } catch (e) {}
+    function stars(url, span) {
+      var m = /^https?:\/\/(?:www\.)?github\.com\/([\w-]+)\/([\w.-]+?)(?:\.git)?\/?(?:[?#].*)?$/i
+        .exec(String(url || '').trim());
+      if (!m) return;
+      var repo = (m[1] + '/' + m[2]).toLowerCase();
+      var key = 'stars:' + repo;
 
-          if (!starRequests[repo]) {
-            starRequests[repo] = fetch("https://api.github.com/repos/" + repo)
-              .then(function (r) {
-                if (!r.ok) throw new Error(r.status);
-                return r.json();
-              })
-              .then(function (j) {
-                var n = j.stargazers_count;
-                try {
-                  localStorage.setItem(
-                    key,
-                    JSON.stringify({ n: n, t: Date.now() }),
-                  );
-                } catch (e) {}
-                return n;
-              });
-          }
-          starRequests[repo].then(put, function () {});
-        }
+      function put(n) {
+        if (typeof n !== 'number') return;
+        span.textContent = '★ ' + shortNumber(n);
+        span.hidden = false;
+      }
 
-        // Title link, optional {tag}, GitHub stars, optional description underneath.
-        function items(id, list, tagOf) {
-          var ul = document.getElementById(id);
-          ul.textContent = "";
-          list = list || [];
-          list.forEach(function (it) {
-            var li = el("li");
-            if (tagOf) li.dataset.type = tagOf(it) || "";
-            li.appendChild(link(it.title, it.url));
-            var tag = tagOf && tagOf(it);
-            if (tag) {
-              li.appendChild(document.createTextNode(" "));
-              li.appendChild(el("span", "tag", "{" + tag + "}"));
-            }
-            var star = el("span", "stars");
-            star.hidden = true;
-            li.appendChild(document.createTextNode(" "));
-            li.appendChild(star);
-            stars(it.url, star);
-            // The "> " in front of descriptions comes from CSS, so drop one typed by hand.
-            var desc = String(it.desc || "").replace(/^\s*>\s*/, "");
-            if (desc) li.appendChild(el("span", "desc", desc));
-            ul.appendChild(li);
+      try {
+        var cached = JSON.parse(localStorage.getItem(key));
+        if (cached && Date.now() - cached.t < 3600000) return put(cached.n);
+      } catch (e) {}
+
+      if (!starRequests[repo]) {
+        starRequests[repo] = fetch('https://api.github.com/repos/' + repo)
+          .then(function (r) {
+            if (!r.ok) throw new Error(r.status);
+            return r.json();
+          })
+          .then(function (j) {
+            var n = j.stargazers_count;
+            try { localStorage.setItem(key, JSON.stringify({ n: n, t: Date.now() })); } catch (e) {}
+            return n;
           });
-          ul.hidden = list.length === 0;
-          document.getElementById(id + "-empty").hidden = list.length > 0;
+      }
+      starRequests[repo].then(put, function () {});
+    }
+
+    // Title link, optional {tag}, GitHub stars, optional description and stack underneath.
+    function items(id, list, tagOf) {
+      var ul = document.getElementById(id);
+      ul.textContent = '';
+      list = list || [];
+      list.forEach(function (it) {
+        var li = el('li');
+        if (tagOf) li.dataset.type = tagOf(it) || '';
+        li.appendChild(link(it.title, it.url));
+        var tag = tagOf && tagOf(it);
+        if (tag) {
+          li.appendChild(document.createTextNode(' '));
+          li.appendChild(el('span', 'tag', '{' + tag + '}'));
         }
+        var star = el('span', 'stars');
+        star.hidden = true;
+        li.appendChild(document.createTextNode(' '));
+        li.appendChild(star);
+        stars(it.url, star);
+        // The "> " in front of descriptions comes from CSS, so drop one typed by hand.
+        var desc = String(it.desc || '').replace(/^\s*>\s*/, '');
+        if (desc) li.appendChild(el('span', 'desc', desc));
+        if (it.stack) li.appendChild(el('span', 'stack', it.stack));
+        ul.appendChild(li);
+      });
+      ul.hidden = list.length === 0;
+      document.getElementById(id + '-empty').hidden = list.length > 0;
+    }
 
-        // Type filter for recommended: [all] [app] [repo] ..., built from the types in data.js.
-        // Rows are only hidden, not re-rendered, so star counts are not fetched again.
-        var currentType = "all";
+    // Type filter for recommended: [all] [app] [repo] ..., built from the types in data.js.
+    // Rows are only hidden, not re-rendered, so star counts are not fetched again.
+    var currentType = 'all';
 
-        function applyFilter() {
-          var box = document.getElementById("recommended-filter");
-          Array.prototype.forEach.call(box.children, function (b) {
-            b.setAttribute(
-              "aria-pressed",
-              String(b.textContent === currentType),
-            );
-          });
-          Array.prototype.forEach.call(
-            document.getElementById("recommended-list").children,
-            function (li) {
-              li.hidden =
-                currentType !== "all" && li.dataset.type !== currentType;
-            },
-          );
-        }
+    function applyFilter() {
+      var box = document.getElementById('recommended-filter');
+      Array.prototype.forEach.call(box.children, function (b) {
+        b.setAttribute('aria-pressed', String(b.textContent === currentType));
+      });
+      Array.prototype.forEach.call(document.getElementById('recommended-list').children, function (li) {
+        li.hidden = currentType !== 'all' && li.dataset.type !== currentType;
+      });
+    }
 
-        function buildFilter() {
-          var box = document.getElementById("recommended-filter");
-          var types = [];
-          (data.recommended || []).forEach(function (it) {
-            if (it.type && types.indexOf(it.type) < 0) types.push(it.type);
-          });
-          if (types.indexOf(currentType) < 0) currentType = "all";
-          box.textContent = "";
-          box.hidden = types.length < 2;
-          ["all"].concat(types).forEach(function (t) {
-            var b = el("button", null, t);
-            b.type = "button";
-            b.addEventListener("click", function () {
-              currentType = t;
-              applyFilter();
-            });
-            box.appendChild(b);
-          });
+    function buildFilter() {
+      var box = document.getElementById('recommended-filter');
+      var types = [];
+      (data.recommended || []).forEach(function (it) {
+        if (it.type && types.indexOf(it.type) < 0) types.push(it.type);
+      });
+      if (types.indexOf(currentType) < 0) currentType = 'all';
+      box.textContent = '';
+      box.hidden = types.length < 2;
+      ['all'].concat(types).forEach(function (t) {
+        var b = el('button', null, t);
+        b.type = 'button';
+        b.addEventListener('click', function () {
+          currentType = t;
           applyFilter();
+        });
+        box.appendChild(b);
+      });
+      applyFilter();
+    }
+
+    function render() {
+      var home = data.home || {};
+      setText('home-lead', home.lead);
+      setText('home-note', home.note);
+
+      items('projects-list', data.projects, function (it) { return it.status; });
+      items('recommended-list', data.recommended, function (it) { return it.type; });
+      buildFilter();
+
+      var about = data.about || {};
+      var box = document.getElementById('about-text');
+      box.textContent = '';
+      String(about.text || '').split(/\n\s*\n/).forEach(function (para) {
+        if (para.trim()) box.appendChild(el('p', null, para.trim()));
+      });
+      var rows = document.getElementById('about-rows');
+      rows.textContent = '';
+      (about.rows || []).forEach(function (r) {
+        var li = el('li');
+        li.appendChild(el('span', 'tag', r.tag));
+        li.appendChild(document.createTextNode(' ' + (r.text || '')));
+        rows.appendChild(li);
+      });
+
+      var contact = document.getElementById('contact-list');
+      contact.textContent = '';
+      (data.contact || []).forEach(function (c) {
+        var li = el('li');
+        li.appendChild(link(c.label, c.url));
+        if (c.tag) {
+          li.appendChild(document.createTextNode(' '));
+          li.appendChild(el('span', 'tag', '{' + c.tag + '}'));
         }
+        contact.appendChild(li);
+      });
+    }
 
-        function render() {
-          var home = data.home || {};
-          setText("home-lead", home.lead);
-          setText("home-note", home.note);
+    function show() {
+      var name = location.hash.slice(1);
+      if (tabs.indexOf(name) < 0) name = 'home';
+      tabs.forEach(function (t) {
+        document.getElementById(t).hidden = (t !== name);
+        var link = document.querySelector('nav a[href="#' + t + '"]');
+        if (t === name) link.setAttribute('aria-current', 'page');
+        else link.removeAttribute('aria-current');
+      });
+      path.textContent = 'C:\\aoki\\' + name;
+      document.title = name === 'home' ? 'aoki' : name + ' | aoki';
+      window.scrollTo(0, 0);
+    }
 
-          items("projects-list", data.projects);
-          items("recommended-list", data.recommended, function (it) {
-            return it.type;
-          });
-          buildFilter();
+    // Keys 1-5 switch tabs. Ignored while typing in a field or with Ctrl / Alt / Cmd.
+    function keys(e) {
+      if (e.ctrlKey || e.metaKey || e.altKey || e.repeat) return;
+      var t = e.target;
+      if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+      var n = parseInt(e.key, 10);
+      if (n >= 1 && n <= tabs.length) location.hash = tabs[n - 1];
+    }
 
-          var about = data.about || {};
-          var box = document.getElementById("about-text");
-          box.textContent = "";
-          String(about.text || "")
-            .split(/\n\s*\n/)
-            .forEach(function (para) {
-              if (para.trim()) box.appendChild(el("p", null, para.trim()));
-            });
-          var rows = document.getElementById("about-rows");
-          rows.textContent = "";
-          (about.rows || []).forEach(function (r) {
-            var li = el("li");
-            li.appendChild(el("span", "tag", r.tag));
-            li.appendChild(document.createTextNode(" " + (r.text || "")));
-            rows.appendChild(li);
-          });
-
-          var contact = document.getElementById("contact-list");
-          contact.textContent = "";
-          (data.contact || []).forEach(function (c) {
-            var li = el("li");
-            li.appendChild(link(c.label, c.url));
-            if (c.tag) {
-              li.appendChild(document.createTextNode(" "));
-              li.appendChild(el("span", "tag", "{" + c.tag + "}"));
-            }
-            contact.appendChild(li);
-          });
-        }
-
-        function show() {
-          var name = location.hash.slice(1);
-          if (tabs.indexOf(name) < 0) name = "home";
-          tabs.forEach(function (t) {
-            document.getElementById(t).hidden = t !== name;
-            var link = document.querySelector('nav a[href="#' + t + '"]');
-            if (t === name) link.setAttribute("aria-current", "page");
-            else link.removeAttribute("aria-current");
-          });
-          path.textContent = "C:\\aoki\\" + name;
-          document.title = name === "home" ? "aoki" : name + " | aoki";
-          window.scrollTo(0, 0);
-        }
-
-        function type(el, text, speed, done) {
-          var i = 0;
-          (function step() {
-            i += 1;
-            el.textContent = text.slice(0, i);
-            if (i < text.length) setTimeout(step, speed);
-            else if (done) setTimeout(done, 250);
-          })();
-        }
-
-        // Typing intro: plays once per visit, only when the site opens on home.
-        function intro() {
-          var reduce =
-            window.matchMedia &&
-            window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-          var played = false;
-          try {
-            played = sessionStorage.getItem("intro") === "1";
-          } catch (e) {}
-          var start = location.hash.slice(1);
-          if (reduce || played || preview || (start && start !== "home"))
-            return;
-          try {
-            sessionStorage.setItem("intro", "1");
-          } catch (e) {}
-
-          var t1 = document.getElementById("t1");
-          var t2 = document.getElementById("t2");
-          var plaque = document.getElementById("plaque");
-          var cursor = document.getElementById("cursor");
-          var line1 = t1.textContent;
-          var line2 = t2.textContent;
-
-          t1.textContent = "";
-          t2.textContent = "";
-          plaque.hidden = true;
-          cursor.hidden = false;
-
-          type(t1, line1, 80, function () {
-            cursor.hidden = true;
-            plaque.hidden = false;
-            type(t2, line2, 110);
-          });
-        }
-
-        // Live preview inside admin.html: the admin sends unsaved content and the
-        // current tab. Only on a local copy, so the published site ignores it.
-        var local =
-          location.protocol === "file:" ||
-          location.hostname === "localhost" ||
-          location.hostname === "127.0.0.1";
-        var preview =
-          local &&
-          window.parent !== window &&
-          /[?&]preview\b/.test(location.search);
-
-        if (preview) {
-          window.addEventListener("message", function (e) {
-            if (
-              e.source !== window.parent ||
-              !e.data ||
-              e.data.from !== "aoki-admin"
-            )
-              return;
-            if (e.data.site) {
-              data = e.data.site;
-              render();
-            }
-            if (e.data.tab && tabs.indexOf(e.data.tab) >= 0)
-              location.hash = e.data.tab;
-          });
-          window.parent.postMessage({ from: "aoki-site", ready: true }, "*");
-        }
-
-        render();
-        window.addEventListener("hashchange", show);
-        show();
-        intro();
+    function type(el, text, speed, done) {
+      var i = 0;
+      (function step() {
+        i += 1;
+        el.textContent = text.slice(0, i);
+        if (i < text.length) setTimeout(step, speed);
+        else if (done) setTimeout(done, 250);
       })();
-    </script>
-  </body>
+    }
+
+    // Typing intro: plays once per visit, only when the site opens on home.
+    function intro() {
+      var reduce = window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var played = false;
+      try { played = sessionStorage.getItem('intro') === '1'; } catch (e) {}
+      var start = location.hash.slice(1);
+      if (reduce || played || preview || (start && start !== 'home')) return;
+      try { sessionStorage.setItem('intro', '1'); } catch (e) {}
+
+      var t1 = document.getElementById('t1');
+      var t2 = document.getElementById('t2');
+      var plaque = document.getElementById('plaque');
+      var cursor = document.getElementById('cursor');
+      var line1 = t1.textContent;
+      var line2 = t2.textContent;
+
+      t1.textContent = '';
+      t2.textContent = '';
+      plaque.hidden = true;
+      cursor.hidden = false;
+
+      type(t1, line1, 80, function () {
+        cursor.hidden = true;
+        plaque.hidden = false;
+        type(t2, line2, 110);
+      });
+    }
+
+    // Live preview inside admin.html: the admin sends unsaved content and the
+    // current tab. Only on a local copy, so the published site ignores it.
+    var local = location.protocol === 'file:' ||
+      location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    var preview = local && window.parent !== window && /[?&]preview\b/.test(location.search);
+
+    if (preview) {
+      window.addEventListener('message', function (e) {
+        if (e.source !== window.parent || !e.data || e.data.from !== 'aoki-admin') return;
+        if (e.data.site) {
+          data = e.data.site;
+          render();
+        }
+        if (e.data.tab && tabs.indexOf(e.data.tab) >= 0) location.hash = e.data.tab;
+      });
+      window.parent.postMessage({ from: 'aoki-site', ready: true }, '*');
+    }
+
+    render();
+    window.addEventListener('hashchange', show);
+    document.addEventListener('keydown', keys);
+    show();
+    intro();
+  })();
+  </script>
+</body>
 </html>

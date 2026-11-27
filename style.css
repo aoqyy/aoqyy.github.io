@@ -157,6 +157,13 @@ p {
   content: "> ";
 }
 
+/* project stack, e.g. "vanilla js · localStorage" */
+.rows .stack {
+  display: block;
+  color: var(--mute);
+  font-size: 0.85em;
+}
+
 .stars {
   color: var(--mute);
   white-space: nowrap;
