@@ -4,13 +4,27 @@ window.SITE = {
     "lead": "I study electronics, write Python and build small tools for my own projects.",
     "note": "Open projects to see what I’m working on."
   },
-    "projects": [
+  "projects": [
     {
       "title": "motd",
       "status": "live",
       "url": "https://github.com/aoqyy/motd",
       "desc": "A minimal terminal-style start page for your browser",
       "stack": "vanilla js · localStorage · 0 dependencies"
+    },
+    {
+      "status": "live",
+      "title": "lab-calc",
+      "url": "https://github.com/aoqyy/lab-calc",
+      "desc": "Lab measurement stats for uni: mean, std, student's t error, linear fit with plot. gui + cli",
+      "stack": "python · tkinter · scipy · matplotlib"
+    },
+    {
+      "status": "wip",
+      "title": "sluice",
+      "url": "https://github.com/aoqyy/sluice",
+      "desc": "Self-hosted openai-compatible llm router. spreads requests across free-tier providers, falls back on rate limits, supports streaming",
+      "stack": "python · fastapi · docker"
     },
     {
       "title": "paper-agents",
