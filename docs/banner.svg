@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="260" viewBox="0 0 800 260" role="img" aria-label="aoqyy.github.io: made by aoki.">
+  <style>
+    text { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #fff; }
+    .mute { fill: #9a9a9a; }
+    .ink { fill: #000; }
+    .bold { font-weight: 700; }
+    .blink { animation: blink 1.1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .blink { animation: none; } }
+  </style>
+
+  <rect width="800" height="260" fill="#000"/>
+
+  <!-- path header -->
+  <text x="40" y="50" font-size="16" class="mute">C:\aoki\home</text>
+
+  <!-- tabs, "home" is active -->
+  <rect x="40" y="70" width="56" height="24" fill="#fff"/>
+  <text x="48" y="87" font-size="16" class="ink">home</text>
+  <text x="108" y="87" font-size="16">projects</text>
+  <text x="205" y="87" font-size="16">recommended</text>
+  <text x="331" y="87" font-size="16">about</text>
+  <text x="399" y="87" font-size="16">contact</text>
+
+  <!-- hero -->
+  <text x="40" y="162" font-size="44" class="bold">made by</text>
+  <rect x="40" y="176" width="150" height="54" fill="#fff"/>
+  <text x="48" y="217" font-size="44" class="ink bold">aoki</text>
+  <text x="153.6" y="217" font-size="44" class="ink bold blink">.</text>
+
+  <!-- tagline -->
+  <text x="760" y="217" font-size="15" class="mute" text-anchor="end">personal site · projects · recommended</text>
+</svg>
